@@ -339,7 +339,15 @@ def generate_payload(inputs, llm_kwargs, history, system_prompt, stream):
 
     conversation_cnt = len(history) // 2
 
-    messages = [{"role": "system", "content": system_prompt}]
+    start_marker = 'fileid://'
+    if inputs.startswith('fileid://'):
+        start_index = inputs.find(start_marker) + len(start_marker)
+        prompt_text2 = inputs[:41]
+        messages = [
+                {'role': 'system', 'content': 'You are a helpful assistant.'},
+                {'role': 'system', 'content': prompt_text2}
+            ]
+        inputs=inputs[41:]
     if conversation_cnt:
         for index in range(0, 2*conversation_cnt, 2):
             what_i_have_asked = {}
