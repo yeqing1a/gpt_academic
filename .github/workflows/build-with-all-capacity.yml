@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages
-name: build-with-all-capacity
 
+name: build-with-all-capacity
 on:
   push:
     branches:
@@ -12,7 +12,8 @@ env:
 
 jobs:
   build-and-push-image:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
